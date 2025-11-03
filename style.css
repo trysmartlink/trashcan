@@ -1,144 +1,113 @@
-/* 基本設定とフォント */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     margin: 0;
-    padding: 0;
-    background-color: #111; /* 背景画像読み込み中の色 */
-    color: #fff;
-}
-
-/* フルスクリーン背景画像 */
-.background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    /* ここを差し替えてください:
-      'background.jpg' をリポジトリにアップロードしてください。
-    */
-    background-image: url('background.png'); 
-    
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    
-    /* 背景をぼかす場合（オプション） */
-    /* filter: blur(10px); */
-    
-    /* コンテンツより背面にする */
-    z-index: -1;
-
-    /* コンテンツを見やすくするため少し暗くする */
-    background-color: rgba(0, 0, 0, 0.4);
-    background-blend-mode: darken;
-}
-
-/* 中央のコンテンツコンテナ */
-.container {
+    padding: 20px;
+    background-color: #f0f2f5;
+    color: #333;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: flex-start; /* 上部に寄せる */
     min-height: 100vh;
-    padding: 30px 15px;
     box-sizing: border-box;
-    width: 100%;
-    max-width: 480px; /* スマートフォンに最適化 */
-    margin: 0 auto;
 }
 
-/* ヘッダー（ジャケット、曲名） */
-.header {
+.container {
+    background-color: #fff;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     text-align: center;
-    margin-bottom: 30px;
+    max-width: 420px; /* スマートフォンサイズに最適化 */
+    width: 100%;
+    margin: 20px 0; /* 上下の余白 */
 }
 
-.jacket {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%; /* 円形にする */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+.album-art img {
+    width: 100%;
+    max-width: 250px; /* スマートフォンでの表示を考慮 */
+    height: auto;
+    border-radius: 8px;
     margin-bottom: 25px;
-    object-fit: cover;
-    border: 3px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .song-title {
     font-size: 2.2em;
     font-weight: 700;
-    margin: 0 0 5px 0;
-    color: #fff;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 5px;
+    color: #222;
+    word-break: keep-all; /* 日本語の改行を考慮 */
 }
 
 .artist-name {
     font-size: 1.2em;
-    font-weight: 400;
-    margin: 0;
-    color: #eee;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    color: #666;
+    margin-bottom: 30px;
 }
 
-/* リンクボタンエリア */
 .links {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px; /* ボタン間のスペース */
 }
 
 .btn {
     display: flex;
     align-items: center;
-    justify-content: center; /* テキストとロゴを中央寄せ */
-    position: relative;
-    padding: 14px 20px 14px 50px; /* 左側にロゴのスペースを確保 */
-    background-color: rgba(255, 255, 255, 0.95);
-    color: #000;
+    justify-content: center;
+    padding: 15px 20px;
+    background-color: #eee;
+    color: #333;
     text-decoration: none;
+    border-radius: 10px;
     font-size: 1.1em;
     font-weight: 600;
-    border-radius: 50px; /* 角丸（fanlink風） */
-    text-align: left;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .btn:hover {
-    transform: scale(1.03);
-    background-color: #fff;
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
 }
 
-/* ロゴアイコンのスタイル（各プラットフォームのアイコンを背景画像として設定） */
-.btn .logo {
-    position: absolute;
-    left: 15px; /* ボタンの左端からの位置 */
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+.btn img {
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+    vertical-align: middle; /* アイコンの垂直方向位置調整 */
 }
 
-/* 各プラットフォームのロゴ画像URLを設定 
-  (ここでは著作権フリーのCDNアイコンを使用する例)
-*/
-.btn.spotify .logo {
-    background-image: url('https://cdn.simpleicons.org/spotify/1ED760');
-}
-.btn.apple-music .logo {
-    background-image: url('https://cdn.simpleicons.org/applemusic/FA58C4');
-}
-.btn.youtube-music .logo {
-    background-image: url('https://cdn.simpleicons.org/youtubemusic/FF0000');
-}
-.btn.line-music .logo {
-    background-image: url('https://cdn.simpleicons.org/linemusic/00C300');
-}
-.btn.amazon-music .logo {
-    background-image: url('https://cdn.simpleicons.org/amazonmusic/9D48E0');
+/* 各プラットフォームのブランドカラーを適用したい場合は以下に追加 */
+/* .btn.spotify { background-color: #1DB954; color: #fff; } */
+/* .btn.apple-music { background-color: #FC3C44; color: #fff; } */
+/* etc... */
+
+/* レスポンシブ対応はmax-widthで既にほとんど対応済み */
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+    .container {
+        padding: 25px 15px;
+        margin: 15px 0;
+    }
+    .album-art img {
+        max-width: 200px;
+    }
+    .song-title {
+        font-size: 1.8em;
+    }
+    .artist-name {
+        font-size: 1em;
+    }
+    .btn {
+        font-size: 1em;
+        padding: 12px 15px;
+    }
+    .btn img {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+    }
 }
